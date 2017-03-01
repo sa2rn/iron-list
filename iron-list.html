@@ -1173,8 +1173,8 @@ will only render 20.
      */
     _itemsChanged: function(change) {
       if (change.path === 'items') {
-        this._virtualStart = this.disableResetScroll ? this._virtualStart : 0;
-        this._physicalTop = this.disableResetScroll ? this._physicalTop : 0;
+        if (!this.disableResetScroll) this._virtualStart = 0;
+        if (!this.disableResetScroll) this._physicalTop = 0;
         this._virtualCount = this.items ? this.items.length : 0;
         this._collection = this.items ? Polymer.Collection.get(this.items) : null;
         this._physicalIndexForKey = {};
