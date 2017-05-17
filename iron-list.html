@@ -1195,8 +1195,13 @@ will only render 20.
         this._physicalItems = this._physicalItems || [];
         this._physicalSizes = this._physicalSizes || [];
         this._physicalStart = 0;
-        if (!this.disableResetScroll && this._scrollTop > this._scrollOffset) {
-          this._resetScrollPosition(0);
+        if (this._scrollTop > this._scrollOffset) {
+          if (this.disableResetScroll) {
+            this._scrollTop = this._scrollTop - 1;
+            this._resetScrollPosition(this._scrollTop + 1);
+          } else {
+            this._resetScrollPosition(0);
+          }
         }
         this._removeFocusedItem();
         this._debounceTemplate(this._render);
